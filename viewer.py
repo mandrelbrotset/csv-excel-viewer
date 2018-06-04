@@ -1,7 +1,8 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+import mainWindow, tableWidget
 
-class main(QtWidgets.QMainWindow):
+class main(QtWidgets.QMainWindow, mainWindow.Ui_MainWindow):
     def __init__(self, parent=None):
         super(main, self).__init__(parent)
         self.setupUi(self)
