@@ -27,12 +27,12 @@ class Ui_MainWindow(object):
 
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(0, 0, 641, 391))
-        self.tableWidget.setRowCount(10)
-        self.tableWidget.setColumnCount(10)
+        #self.tableWidget.setRowCount(10)
+        #self.tableWidget.setColumnCount(10)
         self.tableWidget.setObjectName("tableWidget")
-        self.vBoxLayout = QtWidgets.QVBoxLayout()
-        self.vBoxLayout.addWidget(self.tableWidget)
-        self.setLayout(self.vBoxLayout)
+        #self.vBoxLayout = QtWidgets.QVBoxLayout()
+        #self.vBoxLayout.addWidget(self.tableWidget)
+        #self.setLayout(self.vBoxLayout)
 
         self.actionOpen = QtWidgets.QAction(MainWindow)
         self.actionOpen.setObjectName("actionOpen")
