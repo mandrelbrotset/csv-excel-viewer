@@ -58,12 +58,11 @@ class main(QtWidgets.QMainWindow, mainWindow.Ui_MainWindow):
         self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Name"))
         self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Email"))
 
-        """ self.vBoxLayout = QtWidgets.QVBoxLayout()
-        self.vBoxLayout.addWidget(self.tableWidget)
-        self.setLayout(self.vBoxLayout) """
-        self.centralwidget.
+        self.centralwidget.setVisible(True)
+        self.default_widget.setHidden(True)
 
-        #self.show()
+        self.show()
+        
 if __name__=="__main__":
     app = QtWidgets.QApplication(sys.argv)
     mainWindow = main()         # create an instance of main

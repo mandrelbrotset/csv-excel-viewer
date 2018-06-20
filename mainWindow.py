@@ -24,16 +24,28 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+
+        self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
+        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 641, 391))
+        self.tableWidget.setRowCount(10)
+        self.tableWidget.setColumnCount(10)
+        self.tableWidget.setObjectName("tableWidget")
+        self.vBoxLayout = QtWidgets.QVBoxLayout()
+        self.vBoxLayout.addWidget(self.tableWidget)
+        self.setLayout(self.vBoxLayout)
+
         self.actionOpen = QtWidgets.QAction(MainWindow)
         self.actionOpen.setObjectName("actionOpen")
         self.actionSave = QtWidgets.QAction(MainWindow)
         self.actionSave.setObjectName("actionSave")
         self.actionSave_as = QtWidgets.QAction(MainWindow)
         self.actionSave_as.setObjectName("actionSave_as")
+        
         self.actionExport_as_csv = QtWidgets.QAction(MainWindow)
         self.actionExport_as_csv.setObjectName("actionExport_as_csv")
         self.actionExport_as_excel = QtWidgets.QAction(MainWindow)
         self.actionExport_as_excel.setObjectName("actionExport_as_excel")
+
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionSave_as)
