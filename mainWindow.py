@@ -25,14 +25,9 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 641, 391))
-        #self.tableWidget.setRowCount(10)
-        #self.tableWidget.setColumnCount(10)
-        self.tableWidget.setObjectName("tableWidget")
-        #self.vBoxLayout = QtWidgets.QVBoxLayout()
-        #self.vBoxLayout.addWidget(self.tableWidget)
-        #self.setLayout(self.vBoxLayout)
+        self.openFileButton = QtWidgets.QPushButton(self.centralwidget)
+        self.openFileButton.setGeometry(QtCore.QRect(330, 390, 131, 41))
+        self.openFileButton.setObjectName("openFileButton")
 
         self.actionOpen = QtWidgets.QAction(MainWindow)
         self.actionOpen.setObjectName("actionOpen")
@@ -61,6 +56,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.openFileButton.setText(_translate("Form", "Open File"))
         self.actionOpen.setText(_translate("MainWindow", "Open"))
         self.actionSave.setText(_translate("MainWindow", "Save"))
         self.actionSave_as.setText(_translate("MainWindow", "Save as"))

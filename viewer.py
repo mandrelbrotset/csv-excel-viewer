@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-import mainWindow, defaultWidget
+import mainWindow
 import pandas as pd
 
 class main(QtWidgets.QMainWindow, mainWindow.Ui_MainWindow):
@@ -8,32 +8,17 @@ class main(QtWidgets.QMainWindow, mainWindow.Ui_MainWindow):
         super(main, self).__init__(parent)
         self.setupUi(self)
 
-        self.default_widget = QtWidgets.QWidget(self)
-        self.default_widget.setGeometry(0, 20, 789, 557)
-        self.defaultView = defaultWidget.Ui_Form()
-        self.defaultView.setupUi(self.default_widget)
-
-        self.button = self.defaultView.openFileButton
-        self.button.clicked.connect(self.openFile)
+        self.openFileButton.clicked.connect(self.openFile)
         self.actionOpen.triggered.connect(self.openFile)
 
-        self.centralwidget.setHidden(True)
-        self.default_widget.setVisible(True)
+        self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
+        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 641, 391))
+        self.tableWidget.setHidden(True)
 
         self.show()
 
-        x = self.default_widget.palette()
-        x.setColor(self.default_widget.backgroundRole(), QtCore.Qt.green)
-        self.default_widget.setAutoFillBackground(True)
-        self.default_widget.setPalette(x)
-
-        # y = self.centralwidget.palette()
-        # y.setColor(self.centralwidget.backgroundRole(), QtCore.Qt.red)
-        # self.centralwidget.setAutoFillBackground(True)
-        # self.centralwidget.setPalette(y)
-
     def openFile(self):
-        supportedFileTypes = "excel files (*.xls*);;csv files (*.csv)"
+        supportedFileTypes = "csv files (*.csv);;excel files (*.xls*)"
         name, fileType = QtWidgets.QFileDialog.getOpenFileName(self, "Open File", "",supportedFileTypes)
         print(fileType)
         if fileType == "excel files (*.xls*)":
@@ -44,24 +29,31 @@ class main(QtWidgets.QMainWindow, mainWindow.Ui_MainWindow):
             self.f = pd.read_csv(name)
 
         if len(name) > 0:
-            self.default_widget.setHidden(True)
-            self.centralwidget.setVisible(True)
+            self.openFileButton.setHidden(True)
             self.setupTable()
 
     def setupTable(self):
         self.header = list(self.f.dtypes.index)
-        
-        self.tableWidget = QtWidgets.QTableWidget()
-        self.tableWidget.setRowCount(5)
-        self.tableWidget.setColumnCount(5)
 
-        self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Name"))
-        self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Email"))
+        self.tableWidget.setGeometry(QtCore.QRect(2, 2, 1000, 600))
+        self.tableWidget.setRowCount(self.f.shape[0])
+        self.tableWidget.setColumnCount(self.f.shape[1])
+        self.tableWidget.setObjectName("tableWidget")
+        self.vBoxLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.vBoxLayout.addWidget(self.tableWidget)
+        self.setLayout(self.vBoxLayout)
 
-        self.centralwidget.setVisible(True)
-        self.default_widget.setHidden(True)
+        self.tableWidget.setHorizontalHeaderLabels(self.header)
 
-        self.show()
+        col = 0
+        for index, row in self.f.iterrows():
+            for j, column in row.iteritems():
+                self.tableWidget.setItem(index, col, QtWidgets.QTableWidgetItem(str(column)))
+                col += 1
+            col = 0
+
+        self.openFileButton.setHidden(True)
+        self.tableWidget.setVisible(True)
         
 if __name__=="__main__":
     app = QtWidgets.QApplication(sys.argv)
