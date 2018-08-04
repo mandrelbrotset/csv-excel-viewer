@@ -10,12 +10,19 @@ class main(QtWidgets.QMainWindow, mainWindow.Ui_MainWindow):
 
         self.openFileButton.clicked.connect(self.openFile)
         self.actionOpen.triggered.connect(self.openFile)
+        self.centralwidget.event()
 
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(0, 0, 641, 391))
         self.tableWidget.setHidden(True)
 
         self.show()
+
+        print(self.centralwidget.size())
+
+    def refresh(self):
+        print("size changed!")
+        print(self.centralwidget.size())
 
     def openFile(self):
         # declare accepted file types
